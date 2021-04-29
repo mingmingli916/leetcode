@@ -62,7 +62,7 @@ class Solution:
 
         maximum = ['0']
         self.find_max_pair(self.root, self.root, '', maximum)
-        return self.str2num(maximum[0])
+        return int('0b' + maximum[0], 2)
 
     def find_max_pair(self, left_node, right_node, prefix, maximum):
         # Left and right have same length.
@@ -70,21 +70,19 @@ class Solution:
         if len(left_node.children) == 0:
             return
 
-        left_keys = sorted(left_node.children.keys())
-        right_keys = sorted(right_node.children.keys(), reverse=True)
-        for i in left_keys:
-            for j in right_keys:
+        for i in left_node.children.keys():
+            for j in right_node.children.keys():
                 if i != j:
                     prefix_buf = prefix + '1'
                 else:
+                    if not (len(left_node.children) == len(right_node.children) == 1):
+                        continue
                     prefix_buf = prefix + '0'
 
-                current_num = self.str2num(prefix_buf)
-                max_num = self.str2num(maximum[0][:len(prefix_buf)])
-                if current_num > max_num:
+                if prefix_buf > maximum[0][:len(prefix_buf)]:
                     maximum[0] = prefix_buf
                     self.find_max_pair(left_node.children[i], right_node.children[j], prefix_buf, maximum)
-                elif current_num == max_num:
+                elif prefix_buf == maximum[0][:len(prefix_buf)]:
                     self.find_max_pair(left_node.children[i], right_node.children[j], prefix_buf, maximum)
 
     # def find_max_pair(self, left_node, right_node, index, mask):
@@ -108,9 +106,6 @@ class Solution:
     #                     return
     #                 else:
     #                     self.find_max_pair(left_node.children[i], right_node.children[j], index + 1, mask)
-
-    def str2num(self, str_):
-        return int('0b' + str_, 2)
 
 
 # There is a bug in this part.
