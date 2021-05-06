@@ -37,6 +37,7 @@ Hide Hint #2
 
 """
 from typing import List
+from functools import lru_cache
 
 
 class TrieNode:
@@ -76,30 +77,29 @@ class Solution:
         m = len(board)
         n = len(board[0])
 
+        @lru_cache(100000)
+        def dfs(i: int, j: int, node: TrieNode):
+            if i < 0 or j < 0 or i >= m or j >= n:
+                return
+            c = board[i][j]
+            if c == '#' or c not in node.children:
+                return
+            node = node.children[c]
+            if node.word is not None:  # found a word
+                self.res.append(node.word)
+                node.word = None  # remove the duplicate
+
+            board[i][j] = '#'
+            dfs(i + 1, j, node)
+            dfs(i - 1, j, node)
+            dfs(i, j + 1, node)
+            dfs(i, j - 1, node)
+            board[i][j] = c
+
         for i in range(m):
             for j in range(n):
-                self.dfs(board, i, j, trie.root)
+                dfs(i, j, trie.root)
         return self.res
-
-    def dfs(self, board: List[List[str]], i: int, j: int, node: TrieNode):
-        m = len(board)
-        n = len(board[0])
-        if i < 0 or j < 0 or i >= m or j >= n:
-            return
-        c = board[i][j]
-        if c == '#' or c not in node.children:
-            return
-        node = node.children[c]
-        if node.word is not None:  # found a word
-            self.res.append(node.word)
-            node.word = None  # remove the duplicate
-
-        board[i][j] = '#'
-        self.dfs(board, i + 1, j, node)
-        self.dfs(board, i - 1, j, node)
-        self.dfs(board, i, j + 1, node)
-        self.dfs(board, i, j - 1, node)
-        board[i][j] = c
 
 
 if __name__ == '__main__':
