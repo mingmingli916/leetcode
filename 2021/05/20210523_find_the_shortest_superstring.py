@@ -98,6 +98,26 @@ class Solution2:
         return min(dp[-1])[1]
 
 
+class Solution3:
+    # TODO how?
+    def shortestSuperstring(self, words: List[str]) -> str:
+        def st(B, ans):
+            if len(B) == 0:
+                return ans
+            if not B[0] in ans:
+                return min(st(B[1:], ans + [B[0]]), st(B[1:], [B[0]] + ans), key=lambda x: len(x))
+            else:
+                return st(B[1:], ans)
+
+        if len(words) == 1:
+            return words
+
+        B = sorted(words, key=lambda s: len(s))
+        ans = [B[0]]
+
+        return st(B, ans)
+
+
 if __name__ == '__main__':
     solution = Solution2()
     words = ["alex", "loves", "leetcode"]
