@@ -35,15 +35,16 @@ Constraints:
 
 Hide Hint #1
 Let dp[i] be "the maximum score to reach the end starting at index i".
-The answer for dp[i] is nums[i] + min{dp[i+j]} for 1 <= j <= k.
+The answer for dp[i] is nums[i] + max{dp[i+j]} for 1 <= j <= k.
 That gives an O(n*k) solution.
 
 Hide Hint #2
 Instead of checking every j for every i,
-keep track of the smallest dp[i] values in a heap and calculate dp[i] from right to left.
-When the smallest value in the heap is out of bounds of the current index, remove it and keep checking.
+keep track of the largest dp[i] values in a heap and calculate dp[i] from right to left.
+When the largest value in the heap is out of bounds of the current index, remove it and keep checking.
 """
 from typing import List
+from collections import deque
 
 
 class Solution:
@@ -61,18 +62,29 @@ class Solution:
         return dp[0]
 
 
-class Solution:
+class Solution2:
     def maxResult(self, nums: List[int], k: int) -> int:
-        pass  # todo
+        n = len(nums)
+        deq = deque([n - 1])
+        for i in range(n - 2, -1, -1):
+            if deq[0] - i > k:
+                deq.popleft()
+            nums[i] += nums[deq[0]]
+            while len(deq) and nums[deq[-1]] <= nums[i]:
+                deq.pop()
+            deq.append(i)
+        return nums[0]
 
 
 if __name__ == '__main__':
-    solution = Solution()
+    solution = Solution2()
 
     nums = [1, -1, -2, 4, -7, 3]
     k = 2
-    nums = [10, -5, -2, 4, 0, 3]
-    k = 3
+    # nums = [10, -5, -2, 4, 0, 3]
+    # k = 3
+    # nums = [1, -5, -20, 4, -1, 3, -6, -3]
+    # k = 2
     nums = [1, -5, -20, 4, -1, 3, -6, -3]
     k = 2
 
