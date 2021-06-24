@@ -87,3 +87,12 @@ if __name__ == '__main__':
     while head:
         print(head.val)
         head = head.next
+
+"""
+Template is important and useful.
+It can simplify your think process.
+
+First, write down the main process.
+Second, fill in the absent function.
+Third, deal with the condition situation.
+"""
