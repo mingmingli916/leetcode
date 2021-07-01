@@ -45,15 +45,15 @@ int maxCrossingSubarray(int *nums, int low, int mid, int high)
 
     for (i = mid; i >= low; i--) {
     	sum += nums[i];
-	if (sum > lsum)
-	    lsum = sum;
+        if (sum > lsum)
+            lsum = sum;
     }
 
     sum = 0;
     for (i = mid+1; i <= high; i++) {
     	sum += nums[i];
-	if (sum > rsum)
-	    rsum = sum;
+        if (sum > rsum)
+            rsum = sum;
     }
 
     return lsum + rsum;
