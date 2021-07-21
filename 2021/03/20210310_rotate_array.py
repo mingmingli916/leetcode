@@ -49,9 +49,9 @@ class Solution:
         length = len(nums)
         k = k % length
         nums.reverse()
-        for i in range(k // 2):
+        for i in range(k // 2):  # half of the first part array
             nums[i], nums[k - 1 - i] = nums[k - 1 - i], nums[i]
-        for i in range((length - k) // 2):
+        for i in range((length - k) // 2):  # half of the second part array
             nums[k + i], nums[length - 1 - i] = nums[length - 1 - i], nums[k + i]
 
 
