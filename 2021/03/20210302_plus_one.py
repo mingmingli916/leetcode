@@ -59,9 +59,25 @@ class Solution:
         return list(reversed(reversed_digits))
 
 
+class Solution2:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        carry = 1
+        i = len(digits) - 1
+        while carry and i >= 0:
+            digit = digits[i] + carry
+            carry = digit // 10
+            digits[i] = digit % 10
+            i -= 1
+
+        if carry:
+            digits.insert(0, 1)
+
+        return digits
+
+
 if __name__ == '__main__':
-    solution = Solution()
-    digits = [1, 2, 3]
-    digits = [9, 9]
+    solution = Solution2()
+    digits = [1, 2, 3]  # 124
+    digits = [9, 9]  # 100
     result = solution.plusOne(digits)
     print(result)
