@@ -8,11 +8,7 @@ class Solution:
         """
         length = len(s)
         for i in range((length // 2)):
-            print(i, length - i - 1)
-            tmp = s[length - i - 1]
-            s[length - i - 1] = s[i]
-            s[i] = tmp
-        # print(s)
+            s[i], s[length - i - 1] = s[length - i - 1], s[i]
 
 
 if __name__ == '__main__':
