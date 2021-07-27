@@ -28,8 +28,18 @@ class Solution:
         return -1
 
 
+class Solution2:
+    def firstUniqChar(self, s: str) -> int:
+        counter = collections.Counter(s)
+
+        for i, c in enumerate(s):
+            if counter[c] == 1:
+                return i
+        return -1
+
+
 if __name__ == '__main__':
-    solution = Solution()
+    solution = Solution2()
 
     s = 'leetcode'
     s = "loveleetcode"
