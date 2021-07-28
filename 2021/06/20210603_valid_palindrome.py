@@ -35,6 +35,12 @@ class Solution:
         return True
 
 
+class Solution2:
+    def isPalindrome(self, s: str) -> bool:
+        clean_s = ''.join(filter(str.isalnum, s)).lower()
+        return clean_s == clean_s[::-1]
+
+
 if __name__ == '__main__':
     solution = Solution()
 
