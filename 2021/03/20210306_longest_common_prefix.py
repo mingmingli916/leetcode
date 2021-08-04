@@ -61,8 +61,26 @@ class Solution:
         return shortest[:i + 1]
 
 
+class Solution2:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ''
+
+        shortest = min(strs, key=lambda i: len(i))
+
+        i = 0
+        while i < len(shortest):
+            lcp = shortest[:i + 1]
+            for j in strs:
+                if not j.startswith(lcp):
+                    return shortest[:i]
+            i += 1
+
+        return shortest
+
+
 if __name__ == '__main__':
-    solution = Solution()
+    solution = Solution2()
 
     strs = ["flower", "flow", "flight"]
     strs = ["dog", "racecar", "car"]
