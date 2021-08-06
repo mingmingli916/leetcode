@@ -49,6 +49,7 @@ class Solution:
             latter = latter.next
             former = former.next
 
+        # Delete the nth node.
         latter.next = latter.next.next
 
         return head
