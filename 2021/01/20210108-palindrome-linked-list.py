@@ -26,6 +26,7 @@ class ListNode:
 
 class Solution:
     def isPalindrome(self, head: ListNode) -> bool:
+        # Base case.
         if head is None or head.next is None:
             return True
 
