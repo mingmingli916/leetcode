@@ -48,15 +48,15 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
-        slowp = head
-        fastp = head
+        slow_p = head
+        fast_p = head
         while True:
-            if not (fastp and fastp.next and fastp.next.next):
+            if not (fast_p and fast_p.next and fast_p.next.next):
                 return False
 
-            slowp = slowp.next
-            fastp = fastp.next.next
+            slow_p = slow_p.next
+            fast_p = fast_p.next.next
 
-            if slowp == fastp:
+            if slow_p == fast_p:
                 return True
 
