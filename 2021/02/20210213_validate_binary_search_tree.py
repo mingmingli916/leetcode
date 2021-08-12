@@ -90,7 +90,7 @@ class Solution:
             if not root:
                 return True
 
-            if root.val > maximum or root.val < minimum:
+            if root.val >= maximum or root.val <= minimum:
                 return False
 
             return helper(root.left, minimum, root.val) and helper(root.right, root.val, maximum)
