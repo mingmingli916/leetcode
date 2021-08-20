@@ -34,7 +34,7 @@ Constraints:
 # The isBadVersion API is already defined for you.
 # @param version, an integer
 # @return an integer
-bad = 1
+bad = 10
 
 
 def isBadVersion(version):
@@ -47,9 +47,6 @@ class Solution:
         :type n: int
         :rtype: int
         """
-        # Base case
-        if n == 1:
-            return 1
 
         # Find the first bad version or the last good version
         left, right = 1, n
@@ -60,10 +57,7 @@ class Solution:
             else:
                 left = mid + 1
 
-        # Post process
-        if isBadVersion(mid):
-            return mid
-        return mid + 1
+        return left
 
 
 if __name__ == '__main__':
