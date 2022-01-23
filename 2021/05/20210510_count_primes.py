@@ -117,7 +117,31 @@ class Solution4:
         return True
 
 
+class Solution5:
+    def countPrimes(self, n: int) -> int:
+        lst = [False] * n
+        for i in range(2, n):
+            lst[i] = True
+        i = 2
+        while i * i < n:
+            if not lst[i]:
+                continue
+            j = i * i
+            while j < n:
+                lst[j] = False
+                j += i
+
+            i += 1
+        count = 0
+        i = 2
+        while i < n:
+            if lst[i]:
+                count += 1
+            i += 1
+        return count
+
+
 if __name__ == '__main__':
-    solution = Solution4()
-    res = solution.countPrimes(10)
+    solution = Solution5()
+    res = solution.countPrimes(1000)
     print(res)
